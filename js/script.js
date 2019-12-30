@@ -208,9 +208,11 @@ loop();
 
 var sentences = [
 	'Semicolons optional.',
-	'Best viewed in Sublime Text 3.',
-	'#PCMR',
+	'Best viewed in Visual Studio Code.',
+	'sh -c "$(curl -sL https://nsood.in/randomscript.sh)"',
 	'This text is subject to change.',
+	'Alliteration alert!',
+	'Boolean logic jokes are funny, whether you laugh xor not.',
 ];
 
 var counter = 1;
@@ -324,11 +326,17 @@ for(var i = ages.length - 1; i >= 0; i--) {
 
 // easter egg
 
-var sequence = [87, 65, 75, 65, 78, 68, 65, 70, 79, 82, 69, 86, 69, 82];
+var sequences = [
+	[ 78, 79, 88 ],
+	[ 76, 85, 77, 79, 83 ],
+];
+
+var mode = 0;
 
 var eei = 0;
 
 $(window).on('keyup', function(e) {
+	var sequence = sequences[mode];
 	if(e.keyCode == sequence[eei]) {
 		eei++;
 	}
@@ -338,7 +346,14 @@ $(window).on('keyup', function(e) {
 	}
 
 	if(eei == sequence.length) {
-		$('body').toggleClass('dark-mode');
+		if(mode === 1) {
+			$('body').removeClass('dark-mode');
+			mode = 0;
+		}
+		else {
+			$('body').addClass('dark-mode');
+			mode = 1;
+		}
 		eei = 0;
 	}
 })
