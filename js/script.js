@@ -313,9 +313,9 @@ for(var i = ages.length - 1; i >= 0; i--) {
 		if(ages[i].extend) {
 			var numbers = ['', ' one', ' two', ' three', ' four', ' five', ' six', ' seven', ' eight', ' nine'];
 
-			var n = today.getFullYear() - bday.getFullYear();
+			var numExtn = today.getFullYear() - bday.getFullYear();
 
-			str += numbers[n];
+			str += numbers[numExtn];
 		}
 
 		$('.age').html(str);
