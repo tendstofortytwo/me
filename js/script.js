@@ -35,10 +35,9 @@ bgInit(false);
 function calculateBg() {
 	if(!mobileConditions()) {
 		bgInit(false);
-		
-		$('.bg-scroller').find('.bg').each(function() {
-			$(this).css('opacity', '0');
-		});
+		let backgrounds = $('.bg-scroller').find('.bg');
+		let bgOps = new Array(backgrounds.length).fill(0);
+		let textOps = new Array(backgrounds.length).fill(0);
 		let scrolledWindows = ($(window).scrollTop() - $(window).height()) / $(window).height();
 		if(scrolledWindows < 0) scrolledWindows = 0;
 		let minBg = Math.floor(scrolledWindows);
@@ -56,15 +55,16 @@ function calculateBg() {
 
 		//delta = -1 * Math.cos(delta/1 * (Math.PI/2)) + 1;
 		
-		$('.bg-scroller').find('.bg:nth-child(' + (minBg+1) + ')').css('opacity', 1);
-		$('.bg-scroller').find('.bg:nth-child(' + (maxBg+1) + ')').css('opacity', delta);
-
-
-		$('.works-card:nth-child(' + (minBg+2) + ') .text-container').css({
-			opacity: 1 - delta,
+		bgOps[minBg] = 1;
+		bgOps[maxBg] = delta;
+		backgrounds.each(function(i) {
+			$(this).css('opacity', bgOps[i]);
 		});
-		$('.works-card:nth-child(' + (maxBg+2) + ') .text-container').css({
-			opacity: delta,
+
+		textOps[minBg] = 1-delta;
+		textOps[maxBg] = delta;
+		$('.works-card .text-container').each(function(i) {
+			$(this).css('opacity', textOps[i]);
 		});
 	}
 	
