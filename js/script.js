@@ -51,17 +51,17 @@ function calculateBg() {
 		maxBg = minBg + 1;
 		delta = scrolledWindows - minBg;
 		ogDelta = delta;
-		if(delta < 0.4) {
+		if(delta < 0.3) {
 			delta = 0;
 		}
-		else if(delta < 0.6) {
-			delta = 5*(delta-0.4);
+		else if(delta < 0.7) {
+			delta = 2.5*(delta-0.3);
 		}
 		else {
 			delta = 1;
 		}
 
-		delta = -1 * Math.cos(delta/1 * (Math.PI/2)) + 1;
+		//delta = -1 * Math.cos(delta/1 * (Math.PI/2)) + 1;
 		
 		$('.bg-scroller').find('.bg:nth-child(' + (minBg+1) + ')').css('opacity', 1);
 		$('.bg-scroller').find('.bg:nth-child(' + (maxBg+1) + ')').css('opacity', delta);
@@ -84,9 +84,7 @@ calculateBg();
 
 var timer;
 
-$(window).on('scroll', function() {
-	scrollAnimations();
-
+setInterval(function() {
 	clearTimeout(timer);
 
 	timer = setTimeout(function() {
@@ -103,13 +101,13 @@ $(window).on('scroll', function() {
 			} 
 		});
 
-		if(hash) {
+		if(hash && '#' + hash != location.hash) {
 			history.replaceState({
 				page: hash
 			}, $('title').html(), '#' + hash);
 		}
 	}, 200);
-});
+}, 500);
 
 function scrollAnimations() {
 	calculateBg();
@@ -126,6 +124,13 @@ function scrollAnimations() {
 		});
 	}
 }
+
+//window.addEventListener('scroll', scrollAnimations);
+function scrollLoop() {
+	scrollAnimations();
+	requestAnimationFrame(scrollLoop);
+}
+scrollLoop();
 
 var canvas = $('canvas#bg')[0];
 
@@ -195,10 +200,12 @@ for(var i = 0; i < n; i++) {
 }
 
 function loop() {
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	if($(window).scrollTop() <= $(window).height()) {
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
 	
-	for(var i = 0; i < n; i++) {
-		dots[i].render();
+		for(var i = 0; i < n; i++) {
+			dots[i].render();
+		}
 	}
 		
 	requestAnimationFrame(loop);
