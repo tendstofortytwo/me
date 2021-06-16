@@ -32,46 +32,39 @@ function bgInit(useCSSbg) {
 
 bgInit(false);
 
-var scrolledWindows, minBg, maxBg, delta, ogDelta;
-
 function calculateBg() {
 	if(!mobileConditions()) {
 		bgInit(false);
-		
-		$('.bg-scroller').find('.bg').each(function() {
-			$(this).css('opacity', '0');
-		});
-
-		scrolledWindows = $(window).scrollTop() / $(window).height();
-		// start hax: subtract number of sections above changing background 
-		scrolledWindows -= $($('.works-card')[0]).offset().top / $(window).height();
-		scrolledWindows = Math.max(scrolledWindows, 0);
-		// end hax
-		minBg = Math.floor(scrolledWindows);
-		maxBg = minBg + 1;
-		delta = scrolledWindows - minBg;
-		ogDelta = delta;
-		if(delta < 0.4) {
+		let backgrounds = $('.bg-scroller').find('.bg');
+		let bgOps = new Array(backgrounds.length).fill(0);
+		let textOps = new Array(backgrounds.length).fill(0);
+		let scrolledWindows = ($(window).scrollTop() - $(window).height()) / $(window).height();
+		if(scrolledWindows < 0) scrolledWindows = 0;
+		let minBg = Math.floor(scrolledWindows);
+		let maxBg = minBg + 1;
+		let delta = scrolledWindows - minBg;
+		if(delta < 0.3) {
 			delta = 0;
 		}
-		else if(delta < 0.6) {
-			delta = 5*(delta-0.4);
+		else if(delta < 0.7) {
+			delta = 2.5*(delta-0.3);
 		}
 		else {
 			delta = 1;
 		}
 
-		delta = -1 * Math.cos(delta/1 * (Math.PI/2)) + 1;
+		//delta = -1 * Math.cos(delta/1 * (Math.PI/2)) + 1;
 		
-		$('.bg-scroller').find('.bg:nth-child(' + (minBg+1) + ')').css('opacity', 1);
-		$('.bg-scroller').find('.bg:nth-child(' + (maxBg+1) + ')').css('opacity', delta);
-
-
-		$('.works-card:nth-child(' + (minBg+2) + ') .text-container').css({
-			opacity: 1 - delta,
+		bgOps[minBg] = 1;
+		bgOps[maxBg] = delta;
+		backgrounds.each(function(i) {
+			$(this).css('opacity', bgOps[i]);
 		});
-		$('.works-card:nth-child(' + (maxBg+2) + ') .text-container').css({
-			opacity: delta,
+
+		textOps[minBg] = 1-delta;
+		textOps[maxBg] = delta;
+		$('.works-card .text-container').each(function(i) {
+			$(this).css('opacity', textOps[i]);
 		});
 	}
 	
@@ -84,9 +77,7 @@ calculateBg();
 
 var timer;
 
-$(window).on('scroll', function() {
-	scrollAnimations();
-
+setInterval(function() {
 	clearTimeout(timer);
 
 	timer = setTimeout(function() {
@@ -103,13 +94,13 @@ $(window).on('scroll', function() {
 			} 
 		});
 
-		if(hash) {
+		if(hash && '#' + hash != location.hash) {
 			history.replaceState({
 				page: hash
 			}, $('title').html(), '#' + hash);
 		}
 	}, 200);
-});
+}, 500);
 
 function scrollAnimations() {
 	calculateBg();
@@ -126,6 +117,13 @@ function scrollAnimations() {
 		});
 	}
 }
+
+//window.addEventListener('scroll', scrollAnimations);
+function scrollLoop() {
+	scrollAnimations();
+	requestAnimationFrame(scrollLoop);
+}
+scrollLoop();
 
 var canvas = $('canvas#bg')[0];
 
@@ -195,10 +193,12 @@ for(var i = 0; i < n; i++) {
 }
 
 function loop() {
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	if($(window).scrollTop() <= $(window).height()) {
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
 	
-	for(var i = 0; i < n; i++) {
-		dots[i].render();
+		for(var i = 0; i < n; i++) {
+			dots[i].render();
+		}
 	}
 		
 	requestAnimationFrame(loop);
