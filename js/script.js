@@ -32,8 +32,6 @@ function bgInit(useCSSbg) {
 
 bgInit(false);
 
-var scrolledWindows, minBg, maxBg, delta, ogDelta;
-
 function calculateBg() {
 	if(!mobileConditions()) {
 		bgInit(false);
@@ -41,16 +39,11 @@ function calculateBg() {
 		$('.bg-scroller').find('.bg').each(function() {
 			$(this).css('opacity', '0');
 		});
-
-		scrolledWindows = $(window).scrollTop() / $(window).height();
-		// start hax: subtract number of sections above changing background 
-		scrolledWindows -= $($('.works-card')[0]).offset().top / $(window).height();
-		scrolledWindows = Math.max(scrolledWindows, 0);
-		// end hax
-		minBg = Math.floor(scrolledWindows);
-		maxBg = minBg + 1;
-		delta = scrolledWindows - minBg;
-		ogDelta = delta;
+		let scrolledWindows = ($(window).scrollTop() - $(window).height()) / $(window).height();
+		if(scrolledWindows < 0) scrolledWindows = 0;
+		let minBg = Math.floor(scrolledWindows);
+		let maxBg = minBg + 1;
+		let delta = scrolledWindows - minBg;
 		if(delta < 0.3) {
 			delta = 0;
 		}
