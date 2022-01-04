@@ -273,56 +273,19 @@ $('a[href^="#"]').on('click', function(e) {
 
 // slight convenience: fix the header section with my correct age automatically
 
-var ages = [
-	{
-		year: 2018,
-		number: ' seventeen'
-	},
-	{
-		year: 2019,
-		number: 'n eighteen'
-	},
-	{
-		year: 2020,
-		number: ' nineteen',
-	},
-	{
-		year: 2021,
-		number: ' twenty',
-		extend: true
-	},
-	{
-		year: 2031,
-		number: ' thirty',
-		extend: true
-	},
-	// should not be using this website past this age probably hmm
-	{
-		year: 2041,
-		number: ' &lt;insert big-ass number&gt;',
-	}
-];
-
-for(var i = ages.length - 1; i >= 0; i--) {
-	var bday = new Date('01/19/' + ages[i].year),
-		today = new Date();
-
-	if(bday.getTime() <= today.getTime()) {
-		var str = ages[i].number;
-
-		if(ages[i].extend) {
-			var numbers = ['', ' one', ' two', ' three', ' four', ' five', ' six', ' seven', ' eight', ' nine'];
-
-			var numExtn = today.getFullYear() - bday.getFullYear();
-
-			str += numbers[numExtn];
-		}
-
-		$('.age').html(str);
-
-		break;
-	}
+const birthday = {
+	date: 19,
+	month: 1,
+	year: 2001,
 }
+let today = new Date();
+let age = today.getFullYear() - birthday.year;
+if(today.getMonth() <= birthday.month && today.getDate() < birthday.date) {
+	--age;
+}
+const tens = ['', ' ten plus', ' twenty', ' thirty', ' forty', ' fifty', ' sixty', ' seventy', 'n eighty', ' ninety'];
+const ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+$('.age').html(`${tens[Math.floor(age / 10)]} ${ones[age % 10]}`);
 
 // easter egg
 
