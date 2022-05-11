@@ -42,6 +42,9 @@ body.dark-mode .works-card .text-container a {
   background: rgba(255, 255, 255, 0.1) !important;
   box-shadow: none !important;
 }
+body.dark-mode #contact {
+  color: #ddd !important;
+}
 body.dark-mode footer {
   color: #ddd !important;
 }
