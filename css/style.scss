@@ -18,6 +18,10 @@ body.dark-mode {
 		filter: invert(100%);
 	}
 
+	.clapper {
+		filter: invert(100%);
+	}
+
 	.bg {
 		opacity: 0 !important;
 	}
@@ -520,6 +524,32 @@ footer {
 		//transition: all 0.225s linear;
 		will-change: opacity;
 	}
+}
+
+.clapper {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 10rem;
+	line-height: 10rem;
+	text-align: center;
+	z-index: 100000;
+	font-size: 5rem;
+	pointer-events: none;
+	transition: none;
+	opacity: 0;
+}
+
+.clapper.clapping {
+	animation: clap 1s ease-in-out;
+}
+
+@keyframes clap {
+	0% { opacity: 1; }
+	49% { opacity: 0; }
+	51% { opacity: 1; }
+	100% { opacity: 0; }
 }
 
 @media(min-width: 1800px) {

@@ -290,33 +290,38 @@ $('.age').html(`${tens[Math.floor(age / 10)]} ${ones[age % 10]}`);
 // easter egg
 
 var sequences = [
-	[ 78, 79, 88 ],
-	[ 76, 85, 77, 79, 83 ],
+	[ 99, 108, 97, 112, 111, 102, 102 ],
+	[ 99, 108, 97, 112, 111, 110 ],
 ];
 
 var mode = 0;
 
 var eei = 0;
 
-$(window).on('keyup', function(e) {
+$(window).on('keypress', function(e) {
+	const clapper = document.querySelector('.clapper');
 	var sequence = sequences[mode];
 	if(e.keyCode == sequence[eei]) {
 		eei++;
 	}
-
 	else {
 		eei = 0;
+		console.log(`expected ${sequence[eei]}, got ${e.keyCode}`);
 	}
 
 	if(eei == sequence.length) {
-		if(mode === 1) {
-			$('body').removeClass('dark-mode');
-			mode = 0;
-		}
-		else {
-			$('body').addClass('dark-mode');
-			mode = 1;
-		}
-		eei = 0;
+		clapper.classList.toggle('clapping');
+		setTimeout(() => {
+			if(mode === 1) {
+				$('body').removeClass('dark-mode');
+				mode = 0;
+			}
+			else {
+				$('body').addClass('dark-mode');
+				mode = 1;
+			}
+			eei = 0;
+			setTimeout(() => clapper.classList.toggle('clapping'), 500);
+		}, 500);
 	}
 })
