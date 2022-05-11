@@ -160,7 +160,10 @@ function Point() {
 	this.draw = function() {
 		if(p.progress >= 0) {
 			// opacity of of dot changes with progress
-			ctx.fillStyle = 'rgba(0,0,0,' + Math.sqrt(p.progress*0.005) + ')';
+			const isDarkMode = document.body.classList.contains('dark-mode');
+			let color = isDarkMode ? 255 : 0;
+			let multiplier = isDarkMode ? 0.05 : 0.005;
+			ctx.fillStyle = `rgba(${color}, ${color}, ${color}, ${Math.sqrt(p.progress*multiplier)})`;
 			ctx.beginPath();
 			// radius calculation: maps progress from [0, 1] to [0, pi],
 			// then takes sine of that to get an increase, then decrease

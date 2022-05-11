@@ -12,40 +12,50 @@ body {
 }
 
 body.dark-mode {
-	filter: invert(100%);
-
-	.image-container img {
-		filter: invert(100%);
-	}
-
-	.clapper {
-		filter: invert(100%);
-	}
-
 	.bg {
 		opacity: 0 !important;
 	}
 
+	.main {
+		h1 {
+			color: #ddd;
+		}
+
+		em {
+			color: #ddd;
+		}
+
+		a {
+			color: #ddd;
+
+			&:before, &:after {
+				background: rgba(#ddd, 0.2);
+			}
+		}
+	}
+
 	section:nth-child(even), footer:nth-child(even) {
-		background: #eee !important;
+		background: #111 !important;
+		color: white;
 	}
 
 	section:nth-child(odd), footer:nth-child(odd) {
-		background: white !important;
+		background: #000 !important;
+		color: white;
 	}
 
 	.works-card .text-container {
-		color: #333 !important;
+		color: #ddd !important;
 
 		a {
 			color: inherit !important;
-			background: rgba(0,0,0,0.1) !important;
+			background: rgba(255,255,255,0.1) !important;
 			box-shadow: none !important;
 		}
 	}
 
 	footer {
-		color: #333 !important;
+		color: #ddd !important;
 	}
 }
 
@@ -226,7 +236,7 @@ body.dark-mode {
 				height: 0.33rem;
 				width: 0.33rem;
 				transform: rotate(45deg);
-				border: 1px solid rgba(black, 1);
+				border: 1px solid;
 				border-bottom: 0;
 				border-left: 0;
 				line-height: 1.2rem;
