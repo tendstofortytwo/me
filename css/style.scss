@@ -64,7 +64,7 @@ body.dark-mode {
 }
 
 .main {
-	height: 100vh;
+	min-height: 100vh;
 	position: relative;
 	z-index: 10;
 	display: flex;
@@ -280,6 +280,7 @@ body.dark-mode {
 	z-index: 10;
 	text-align: center;
 	padding: 5rem 2rem 3rem;
+	background: white;
 
 	h1 {
 		font-size: 3.3rem;
