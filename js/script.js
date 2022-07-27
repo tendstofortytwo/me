@@ -31,7 +31,7 @@ function bgInit(useCSSbg) {
 
 		if(useCSSbg) {
 			el.style.background = el.getAttribute('data-bg');
-			el.querySelector('.text-container').styles.opacity = '1';
+			el.querySelector('.text-container').style.opacity = '1';
 		}
 		else {
 			el.style.background = '';
