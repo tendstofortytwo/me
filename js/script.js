@@ -1,111 +1,3 @@
-let firstInit = true;
-
-function mobileConditions() {
-	return !(window.innerWidth > 900 && window.innerHeight < window.innerWidth);
-}
-
-function tag(name, classes, id) {
-	const el = document.createElement(name);
-	if(classes) {
-		for(const c of classes) {
-			el.classList.add(c);
-		}
-	}
-	if(id) {
-		el.id = id;
-	}
-	return el;
-}
-
-function bgInit(useCSSbg) {	
-	document.querySelectorAll('.works-card').forEach((el) => {
-		const styles = getComputedStyle(el);
-		if(firstInit) {
-			let bg = styles['background-image'];
-			if(bg === 'none') bg = styles['background-color'];
-			el.setAttribute('data-bg', bg);
-			const bgEl = tag('div', ['bg']);
-			bgEl.style.background = bg;
-			document.querySelector('.bg-scroller').appendChild(bgEl);
-		}
-
-		if(useCSSbg) {
-			el.style.background = el.getAttribute('data-bg');
-			el.querySelector('.text-container').style.opacity = '1';
-		}
-		else {
-			el.style.background = '';
-		}
-	});
-	
-	firstInit = false;
-}
-
-bgInit(false);
-
-function calculateBg() {
-	if(!mobileConditions()) {
-		bgInit(false);
-		const backgrounds = document.querySelector('.bg-scroller').querySelectorAll('.bg');
-		const bgOps = new Array(backgrounds.length).fill(0);
-		const textOps = new Array(backgrounds.length).fill(0);
-		let scrolledWindows = (window.scrollY - window.innerHeight) / window.innerHeight;
-		if(scrolledWindows < 0) scrolledWindows = 0;
-		const minBg = Math.floor(scrolledWindows);
-		const maxBg = minBg + 1;
-		let delta = scrolledWindows - minBg;
-		if(delta < 0.3) {
-			delta = 0;
-		}
-		else if(delta < 0.7) {
-			delta = 2.5*(delta-0.3);
-		}
-		else {
-			delta = 1;
-		}
-
-		//delta = -1 * Math.cos(delta/1 * (Math.PI/2)) + 1;
-		
-		bgOps[minBg] = 1;
-		bgOps[maxBg] = delta;
-		backgrounds.forEach(function(el, i) {
-			el.style.opacity = bgOps[i];
-		});
-
-		textOps[minBg] = 1-delta;
-		textOps[maxBg] = delta;
-		document.querySelectorAll('.works-card .text-container').forEach(function(el, i) {
-			el.style.opacity = textOps[i];
-		});
-	}
-	
-	else {
-		bgInit(true);
-	}
-}
-
-calculateBg();
-
-function scrollAnimations() {
-	calculateBg();
-
-	if(!mobileConditions()) {
-		document.querySelectorAll('.main h1, .main h3').forEach(function(el) {
-			const scrolledFrac = window.scrollY / window.innerHeight;
-			el.style.opacity = Math.min(1, 1.2 - 1.5*scrolledFrac).toString();
-			el.style.position = 'relative';
-			el.style.top = (scrolledFrac * window.innerHeight / 2).toString() + 'px';
-		});
-	}
-}
-
-//window.addEventListener('scroll', scrollAnimations);
-function scrollLoop() {
-	scrollAnimations();
-	requestAnimationFrame(scrollLoop);
-}
-scrollLoop();
-
 const canvas = document.querySelector('canvas#bg');
 
 canvas.width = window.innerWidth;
@@ -189,57 +81,6 @@ function loop() {
 
 loop();
 
-const sentences = [
-	'Semicolons optional.',
-	'Best viewed in Visual Studio Code.',
-	'sh -c "$(curl -sL https://nsood.in/randomscript.sh)"',
-	'This text is subject to change.',
-	'Alliteration alert!',
-	'Boolean logic jokes are funny, whether you laugh xor not.',
-];
-
-let counter = 1;
-
-const ticker = document.querySelector("footer .ticker");
-
-function changeText() {
-	const el = ticker;
-	const text = sentences[counter];
-		oldText = el.textContent;
-
-	const x = setInterval(function() {
-		if(oldText.length != 0) {
-			oldText = oldText.slice(0, -1);
-			el.textContent = oldText;
-		}
-		else {
-			setTimeout(function() {
-				const y = setInterval(function() {
-					if(el.textContent.length != text.length) {
-						el.textContent = text.slice(0, el.textContent.length+1);
-					}
-					else {
-						setTimeout(function() {
-							if(counter >= sentences.length - 1)
-								counter = 0;
-							else
-								counter++;
-
-							changeText();
-						}, 5000);
-						clearInterval(y);
-					}
-				}, 60);
-			}, 60);
-			clearInterval(x);
-		}
-	}, 60);
-}
-
-ticker.textContent = sentences[0];
-
-setTimeout(changeText, 5000);
-
 // slight convenience: fix the header section with my correct age automatically
 
 const birthday = {
@@ -293,3 +134,7 @@ addEventListener('keypress', e => {
 		}, 500);
 	}
 });
+
+function among() {
+	alert('haha among us');
+}
