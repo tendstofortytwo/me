@@ -13,25 +13,37 @@ body {
 }
 
 body.dark-mode {
+	background: black;
+	color: white;
+
 	.bg {
 		opacity: 0 !important;
 	}
 
 	.main {
 		h1 {
-			color: #ddd;
+			color: #fff;
 		}
 
 		em {
-			color: #ddd;
+			color: #fff;
 		}
 
-		a {
-			color: #ddd;
+		h3 {
+			color: #aaa;
+		}
+
+		h3 a {
+			color: #fff;
 
 			&:before, &:after {
-				background: rgba(#ddd, 0.2);
+				background: rgba(#fff, 0.2);
 			}
+		}
+
+		a.contact-method p {
+			color: #fff;
+			font-size: 1rem;
 		}
 	}
 }

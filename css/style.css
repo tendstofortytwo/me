@@ -12,20 +12,31 @@ body {
   font-family: "Nunito", sans-serif;
 }
 
+body.dark-mode {
+  background: black;
+  color: white;
+}
 body.dark-mode .bg {
   opacity: 0 !important;
 }
 body.dark-mode .main h1 {
-  color: #ddd;
+  color: #fff;
 }
 body.dark-mode .main em {
-  color: #ddd;
+  color: #fff;
 }
-body.dark-mode .main a {
-  color: #ddd;
+body.dark-mode .main h3 {
+  color: #aaa;
 }
-body.dark-mode .main a:before, body.dark-mode .main a:after {
-  background: rgba(221, 221, 221, 0.2);
+body.dark-mode .main h3 a {
+  color: #fff;
+}
+body.dark-mode .main h3 a:before, body.dark-mode .main h3 a:after {
+  background: rgba(255, 255, 255, 0.2);
+}
+body.dark-mode .main a.contact-method p {
+  color: #fff;
+  font-size: 1rem;
 }
 
 .main {

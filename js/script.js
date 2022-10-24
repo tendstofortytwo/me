@@ -4,6 +4,11 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const ctx = canvas.getContext('2d');
+const FILL_STYLES = {
+	light: 'rgba(0,0,0,0.05)',
+	dark: 'rgba(255,255,255,0.15)'
+}
+ctx.fillStyle = FILL_STYLES.light;
 
 addEventListener('resize', () => {
 	canvas.width = window.innerWidth;
@@ -30,11 +35,6 @@ function Point() {
 	
 	this.draw = function() {
 		if(this.progress >= 0) {
-			// opacity of of dot changes with progress
-			const isDarkMode = document.body.classList.contains('dark-mode');
-			const color = isDarkMode ? 255 : 0;
-			const multiplier = isDarkMode ? 0.05 : 0.005;
-			ctx.fillStyle = `rgba(${color}, ${color}, ${color}, ${Math.sqrt(this.progress*multiplier)})`;
 			ctx.beginPath();
 			// radius calculation: maps progress from [0, 1] to [0, pi],
 			// then takes sine of that to get an increase, then decrease
@@ -68,12 +68,10 @@ for(let i = 0; i < n; i++) {
 }
 
 function loop() {
-	if(window.scrollY <= window.innerHeight) {
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-	
-		for(let i = 0; i < n; i++) {
-			dots[i].render();
-		}
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	for(let i = 0; i < n; i++) {
+		dots[i].render();
 	}
 		
 	requestAnimationFrame(loop);
@@ -90,7 +88,7 @@ const birthday = {
 }
 const today = new Date();
 let age = today.getFullYear() - birthday.year;
-if(today.getMonth() <= birthday.month && today.getDate() < birthday.date) {
+if(today.getMonth() < birthday.month || (today.getMonth() == birthday.month && today.getDate() < birthday.date)) {
 	--age;
 }
 const tens = ['', ' ten plus', ' twenty', ' thirty', ' forty', ' fifty', ' sixty', ' seventy', 'n eighty', ' ninety'];
@@ -123,10 +121,12 @@ addEventListener('keypress', e => {
 		setTimeout(() => {
 			if(mode === 1) {
 				document.body.classList.remove('dark-mode');
+				ctx.fillStyle = FILL_STYLES.light;
 				mode = 0;
 			}
 			else {
 				document.body.classList.add('dark-mode');
+				ctx.fillStyle = FILL_STYLES.dark;
 				mode = 1;
 			}
 			eei = 0;
