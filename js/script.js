@@ -9,10 +9,13 @@ const FILL_STYLES = {
 	dark: 'rgba(255,255,255,0.15)'
 }
 ctx.fillStyle = FILL_STYLES.light;
+let darkMode = 0;
 
 addEventListener('resize', () => {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
+	// need to set ctx.fillStyle whenever I resize???
+	ctx.fillStyle = darkMode ? FILL_STYLES.dark : FILL_STYLES.light;
 });
 
 function Point() {
@@ -102,13 +105,11 @@ const sequences = [
 	[ 99, 108, 97, 112, 111, 110 ],
 ];
 
-let mode = 0;
-
 let eei = 0;
 
 addEventListener('keypress', e => {
 	const clapper = document.querySelector('.clapper');
-	const sequence = sequences[mode];
+	const sequence = sequences[darkMode];
 	if(e.keyCode == sequence[eei]) {
 		eei++;
 	}
@@ -119,15 +120,15 @@ addEventListener('keypress', e => {
 	if(eei == sequence.length) {
 		clapper.classList.toggle('clapping');
 		setTimeout(() => {
-			if(mode === 1) {
+			if(darkMode) {
 				document.body.classList.remove('dark-mode');
 				ctx.fillStyle = FILL_STYLES.light;
-				mode = 0;
+				darkMode = 0;
 			}
 			else {
 				document.body.classList.add('dark-mode');
 				ctx.fillStyle = FILL_STYLES.dark;
-				mode = 1;
+				darkMode = 1;
 			}
 			eei = 0;
 			setTimeout(() => clapper.classList.toggle('clapping'), 500);
