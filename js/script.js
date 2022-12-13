@@ -46,6 +46,7 @@ function Point() {
 		this.x = Math.random() * canvas.width;
 		this.y = snowing ? initialProgress * canvas.height / 3 : Math.random() * canvas.height;
 		this.r = snowing ? Math.random() * r : 0;
+		this.rng = Math.random();
 	}
 	
 	this.draw = function() {
@@ -57,13 +58,15 @@ function Point() {
 			// accidentally causing negative sine values which cause ctx.arc
 			// to throw errors
 			if(!snowing) ctx.arc(this.x, this.y, Math.abs(Math.sin(Math.PI*this.progress)*r), 0, 2*Math.PI);
-			else ctx.arc(this.x + 20 * Math.sin(this.progress * 3 * Math.PI), this.y, this.r, 0, 2*Math.PI);
+			else ctx.arc(
+				this.x + 20 * Math.sin(this.progress * 3 * Math.PI) + Math.cos(this.progress * (5*this.rng) * Math.PI),
+				this.y, this.r, 0, 2*Math.PI);
 			ctx.fill();
 		}
 	};
 	this.render = function() {
 		if(snowing) {
-			this.y += Math.pow(this.r, 0.25);
+			this.y += (Math.pow(this.rng, 0.25)) * 0.5 * (1 + Math.sin(this.progress % Math.PI));
 			this.x = (this.x + 0.3) % canvas.width; // wind
 			this.progress += 0.005;
 			this.draw();
@@ -121,8 +124,8 @@ document.querySelector('.age').textContent = `${tens[Math.floor(age / 10)]} ${on
 // easter egg
 
 const sequences = [
-	[ 99, 108, 97, 112, 111, 102, 102 ],
-	[ 99, 108, 97, 112, 111, 110 ],
+	'CLAPOFF'.split('').map(s => 'Key' + s),
+	'CLAPON'.split('').map(s => 'Key' + s)
 ];
 
 let eei = 0;
@@ -130,7 +133,7 @@ let eei = 0;
 addEventListener('keypress', e => {
 	const clapper = document.querySelector('.clapper');
 	const sequence = sequences[darkMode];
-	if(e.keyCode == sequence[eei]) {
+	if(e.code == sequence[eei]) {
 		eei++;
 	}
 	else {
@@ -173,3 +176,10 @@ addEventListener('keypress', e => {
 function among() {
 	alert('haha among us');
 }
+
+document.querySelector('.among').addEventListener('keypress', e => {
+	if(e.code === 'Space') {
+		e.preventDefault();
+		among();
+	}
+});
