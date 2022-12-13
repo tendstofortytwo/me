@@ -9,17 +9,17 @@ const ctx = canvas.getContext('2d');
 const FILL_STYLES = {
 	light: 'rgba(0,0,0,0.05)',
 	dark: 'rgba(255,255,255,0.15)',
-	snowing: 'rgb(58, 82, 115)'
+	snowing: 'rgb(206, 212, 220)'
 };
 const BACKGROUNDS = {
-	evening: '#0c2b53',
+	evening: 'linear-gradient(#011d32, #3b3b89)',
 	night: '#000000'
 };
 ctx.fillStyle = snowing ? FILL_STYLES.snowing : FILL_STYLES.light;
 let darkMode = 0;
 if(snowing) {
 	document.body.classList.add('dark-mode');
-	document.body.style.backgroundColor = BACKGROUNDS.evening;
+	document.body.style.background = BACKGROUNDS.evening;
 }
 
 addEventListener('resize', () => {
@@ -30,7 +30,7 @@ addEventListener('resize', () => {
 });
 
 function Point() {
-	const r = 8;
+	const r = snowing ? 4 : 8;
 	
 	// progress below 0 is neglected, negative initial
 	// progress serves to introduce random delays - 
@@ -63,8 +63,8 @@ function Point() {
 	};
 	this.render = function() {
 		if(snowing) {
-			this.y += 0.5 * Math.pow(this.r, 0.25);
-			this.x = (this.x + 0.3) % (canvas.width + this.r); // wind
+			this.y += Math.pow(this.r, 0.25);
+			this.x = (this.x + 0.3) % canvas.width; // wind
 			this.progress += 0.005;
 			this.draw();
 			if(this.y >= canvas.height + r) this.init();
@@ -156,12 +156,12 @@ addEventListener('keypress', e => {
 			} else {
 				if(darkMode) {
 					ctx.fillStyle = FILL_STYLES.snowing;
-					document.body.style.backgroundColor = BACKGROUNDS.evening;
+					document.body.style.background = BACKGROUNDS.evening;
 					darkMode = 0;
 				}
 				else {
 					ctx.fillStyle = FILL_STYLES.dark;
-					document.body.style.backgroundColor = BACKGROUNDS.night;
+					document.body.style.background = BACKGROUNDS.night;
 					darkMode = 1;
 				}
 			}
