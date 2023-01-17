@@ -3,7 +3,7 @@ const canvas = document.querySelector('canvas#bg');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const snowing = true;
+const snowing = false;
 
 const ctx = canvas.getContext('2d');
 const FILL_STYLES = {
@@ -86,7 +86,7 @@ function Point() {
 
 const dots = [];
 
-const n = 50;
+const n = snowing ? 50 : 20;
 
 for(let i = 0; i < n; i++) {
 	dots[i] = new Point();
