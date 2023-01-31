@@ -239,5 +239,10 @@ body.dark-mode .main a.contact-method p {
     opacity: 0;
   }
 }
+@media (prefers-reduced-motion) {
+  canvas#bg {
+    display: none;
+  }
+}
 
 /*# sourceMappingURL=style.css.map */

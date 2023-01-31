@@ -270,3 +270,9 @@ body.dark-mode {
 	51% { opacity: 1; }
 	100% { opacity: 0; }
 }
+
+@media (prefers-reduced-motion) {
+	canvas#bg {
+		display: none;
+	}
+}
