@@ -109,7 +109,7 @@ loop();
 
 const birthday = {
 	date: 19,
-	month: 1,
+	month: 0,
 	year: 2001,
 }
 const today = new Date();
