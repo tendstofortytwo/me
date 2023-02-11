@@ -10,36 +10,59 @@ html {
 body {
   margin: 0;
   font-family: "Nunito", sans-serif;
+  background: var(--bgColor);
 }
-
+@media (prefers-color-scheme: light) {
+  body {
+    --bgColor: white;
+    --textColor: #777;
+    --iconColor: black;
+    --boldColor: black;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    --bgColor: black;
+    --iconColor: white;
+    --textColor: #aaa;
+    --boldColor: white;
+  }
+}
+body.lite-mode {
+  --bgColor: white;
+  --textColor: #777;
+  --iconColor: black;
+  --boldColor: black;
+}
 body.dark-mode {
-  background: black;
-  color: white;
+  --bgColor: black;
+  --iconColor: white;
+  --textColor: #aaa;
+  --boldColor: white;
 }
-body.dark-mode .bg {
-  opacity: 0 !important;
+body.mint-mode {
+  --bgColor: #c7fcee;
+  --iconColor: #486b61;
+  --textColor: #5f8c80;
+  --boldColor: #10352b;
 }
-body.dark-mode .main h1 {
-  color: #fff;
+body.purp-mode {
+  --bgColor: #cfc7fc;
+  --iconColor: #5a518c;
+  --textColor: #7166af;
+  --boldColor: #312c4c;
 }
-body.dark-mode .main em {
-  color: #fff;
+body.yell-mode {
+  --bgColor: #fcfcbf;
+  --iconColor: #54543f;
+  --textColor: #8c8c5f;
+  --boldColor: #353528;
 }
-body.dark-mode .main h3 {
-  color: #aaa;
-}
-body.dark-mode .main h3 a {
-  color: #fff;
-}
-body.dark-mode .main h3 a:before, body.dark-mode .main h3 a:after {
-  background: rgba(255, 255, 255, 0.2);
-}
-body.dark-mode .main h3 a.among {
-  color: inherit;
-}
-body.dark-mode .main a.contact-method p {
-  color: #fff;
-  font-size: 1rem;
+body.blue-mode {
+  --bgColor: #ade3ff;
+  --iconColor: #394b54;
+  --textColor: #46748c;
+  --boldColor: #242f35;
 }
 
 .main {
@@ -69,33 +92,25 @@ body.dark-mode .main a.contact-method p {
   font-size: 4rem;
   font-weight: 600;
   margin: 0 0 2rem;
-  color: #000;
+  color: var(--boldColor);
 }
 .main h3 {
   margin: 1rem 0 0;
   font-size: 1.7rem;
   line-height: 1.4;
   font-weight: normal;
-  color: #777;
+  color: var(--textColor);
 }
 .main em {
-  color: #000;
+  color: var(--boldColor);
   font: inherit;
 }
 .main h3 a {
-  color: #000;
+  color: var(--boldColor);
   text-decoration: none;
   border-bottom: 0.2rem solid transparent;
   white-space: nowrap;
   position: relative;
-}
-.main h3 a.among {
-  color: inherit;
-  border-bottom: 0;
-  cursor: text;
-}
-.main h3 a.among:before, .main h3 a.among:after {
-  content: none;
 }
 .main h3 a:before, .main h3 a:after {
   content: "";
@@ -103,9 +118,9 @@ body.dark-mode .main a.contact-method p {
   left: 0;
   width: 100%;
   height: 0.1rem;
-  background: rgba(51, 51, 51, 0.2);
+  background: var(--boldColor);
   position: absolute;
-  opacity: 0.2;
+  opacity: 0.04;
   transition: all 0.2s ease;
 }
 .main h3 a:before {
@@ -113,11 +128,19 @@ body.dark-mode .main a.contact-method p {
   transform-origin: center left;
 }
 .main h3 a:after {
-  opacity: 0.5;
+  opacity: 0.1;
 }
 .main h3 a:hover:before {
   transform: scaleX(1);
-  opacity: 1;
+  opacity: 0.2;
+}
+.main h3 button {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
 }
 .main .contact-methods {
   display: flex;
@@ -131,6 +154,9 @@ body.dark-mode .main a.contact-method p {
   overflow: visible;
   width: 4rem;
   height: 4rem;
+}
+.main .contact-methods a.contact-method i {
+  color: var(--iconColor);
 }
 .main .contact-methods a.contact-method p {
   margin: 0;
@@ -219,6 +245,7 @@ body.dark-mode .main a.contact-method p {
   pointer-events: none;
   transition: none;
   opacity: 0;
+  color: var(--boldColor);
 }
 
 .clapper.clapping {

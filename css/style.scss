@@ -10,45 +10,62 @@ html {
 body {
 	margin: 0;
 	font-family: 'Nunito', sans-serif;
-}
+	background: var(--bgColor);
 
-body.dark-mode {
-	background: black;
-	color: white;
-
-	.bg {
-		opacity: 0 !important;
+	@media(prefers-color-scheme: light) {
+		--bgColor: white;
+		--textColor: #777;
+		--iconColor: black;
+		--boldColor: black;
 	}
 
-	.main {
-		h1 {
-			color: #fff;
-		}
+	@media(prefers-color-scheme: dark) {
+		--bgColor: black;
+		--iconColor: white;
+		--textColor: #aaa;
+		--boldColor: white;
+	}
 
-		em {
-			color: #fff;
-		}
+	&.lite-mode {
+		--bgColor: white;
+		--textColor: #777;
+		--iconColor: black;
+		--boldColor: black;
+	}
 
-		h3 {
-			color: #aaa;
-		}
+	&.dark-mode {
+		--bgColor: black;
+		--iconColor: white;
+		--textColor: #aaa;
+		--boldColor: white;
+	}
 
-		h3 a {
-			color: #fff;
+	&.mint-mode {
+		--bgColor: #c7fcee;
+		--iconColor: #486b61;
+		--textColor: #5f8c80;
+		--boldColor: #10352b;
+	}
 
-			&:before, &:after {
-				background: rgba(#fff, 0.2);
-			}
+	&.purp-mode {
+		--bgColor: #cfc7fc;
+		--iconColor: #5a518c;
+		--textColor: #7166af;
+		--boldColor: #312c4c;
+	}
 
-			&.among {
-				color: inherit;
-			}
-		}
+	&.yell-mode {
+		--bgColor: #fcfcbf;
+		--iconColor: #54543f;
+		--textColor: #8c8c5f;
+		--boldColor: #353528;
+	}
 
-		a.contact-method p {
-			color: #fff;
-			font-size: 1rem;
-		}
+	&.blue-mode {
+		--bgColor: #ade3ff;
+		--iconColor: #394b54;
+		--textColor: #46748c;
+		--boldColor: #242f35;
 	}
 }
 
@@ -83,7 +100,7 @@ body.dark-mode {
 		font-size: 4rem;
 		font-weight: 600;
 		margin: 0 0 2rem;
-		color: #000;
+		color: var(--boldColor);
 	}
 
 	h3 {
@@ -91,29 +108,20 @@ body.dark-mode {
 		font-size: 1.7rem;
 		line-height: 1.4;
 		font-weight: normal;
-		color: #777;
+		color: var(--textColor);
 	}
 
 	em {
-		color: #000;
+		color: var(--boldColor);
 		font: inherit;
 	}
 
 	h3 a {
-		color: #000;
+		color: var(--boldColor);
 		text-decoration: none;
 		border-bottom: 0.2rem solid transparent;
 		white-space: nowrap;
 		position: relative;
-
-		&.among {
-			color: inherit;
-			border-bottom: 0;
-			&:before, &:after {
-				content: none;
-			}
-			cursor: text;
-		}
 
 		&:before, &:after {
 			content: '';
@@ -121,9 +129,9 @@ body.dark-mode {
 			left: 0;
 			width: 100%;
 			height: 0.1rem;
-			background: rgba(#333, 0.2);
+			background: var(--boldColor);
 			position: absolute;
-			opacity: 0.2;
+			opacity: 0.04;
 			transition: all 0.2s ease;
 		}
 
@@ -133,13 +141,22 @@ body.dark-mode {
 		}
 
 		&:after {
-			opacity: 0.5;
+			opacity: 0.1;
 		}
 
 		&:hover:before {
 			transform: scaleX(1);
-			opacity: 1;
+			opacity: 0.2;
 		}
+	}
+
+	h3 button {
+		color: inherit;
+		font: inherit;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background: none;
 	}
 
 	.contact-methods {
@@ -154,6 +171,10 @@ body.dark-mode {
 			overflow: visible;
 			width: 4rem;
 			height: 4rem;
+
+			i {
+				color: var(--iconColor);
+			}
 
 			p {
 				margin: 0;
@@ -258,6 +279,7 @@ body.dark-mode {
 	pointer-events: none;
 	transition: none;
 	opacity: 0;
+	color: var(--boldColor);
 }
 
 .clapper.clapping {
