@@ -116,12 +116,10 @@ const sequences = [
 	'YELL',
 	'BLUE',
 	'SAVE'
-].map(seq => {
-	return {
-		word: seq,
-		combo: seq.split('').map(c => 'Key' + c)
-	}
-});
+].map(seq => ({
+	word: seq,
+	combo: seq.split('').map(c => 'Key' + c)
+}));
 
 const lastFourKeys = [];
 
