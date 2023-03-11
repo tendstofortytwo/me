@@ -270,12 +270,12 @@ body {
 		text-align: center;
 		line-height: 3rem;
 		padding: 0;
-		background: rgba(255, 255, 255, 0.8);
-		color: rgba(0, 0, 0, 0.6);
+		background: var(--textColor);
+		color: var(--bgColor);
 		cursor: pointer;
 
 		&:hover {
-			background: white;
+			background: var(--boldColor);
 		}
 	}
 	
