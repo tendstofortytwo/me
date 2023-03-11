@@ -266,6 +266,16 @@ body.blue-mode {
   overflow: scroll;
   box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.3), 0 0.15rem 1rem rgba(0, 0, 0, 0.1);
   font-size: 1.33rem;
+  opacity: 0;
+  transform: translateY(-10%);
+  pointer-events: none;
+  transition: all 0.2s ease;
+  display: block;
+}
+.main dialog.change-color-dialog[open] {
+  opacity: 1;
+  transform: translateY(0%);
+  pointer-events: all;
 }
 .main dialog.change-color-dialog h4 {
   margin: 0 0 1rem;
@@ -319,7 +329,9 @@ body.blue-mode {
   border: 0;
 }
 .main dialog.change-color-dialog[open] + button.change-color-button {
-  display: none;
+  transition: all 0.2s ease;
+  opacity: 0;
+  pointer-events: none;
 }
 
 @media (max-width: 69rem), (orientation: portrait) {
