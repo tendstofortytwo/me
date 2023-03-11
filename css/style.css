@@ -328,6 +328,11 @@ body.blue-mode {
     padding: 2rem;
   }
 }
+@media (max-width: 30rem) {
+  dialog.change-color-dialog br {
+    display: none;
+  }
+}
 @media (max-width: 25rem) {
   .main > .text-container h1 {
     font-size: 3rem;
