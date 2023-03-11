@@ -123,6 +123,16 @@ const sequences = [
 
 const lastFourKeys = [];
 
+function changeColor(word) {
+	const clapper = document.querySelector('.clapper');
+	clapper.classList.toggle('clapping');
+	setTimeout(() => {
+		document.body.setAttribute('class', `${word.toLowerCase()}-mode`);
+		document.querySelector(`#change-color-to-${word}`).checked = true;
+		setTimeout(() => clapper.classList.toggle('clapping'), 500);
+	}, 500);
+}
+
 addEventListener('keypress', e => {
 	lastFourKeys.push(e.code);
 	while(lastFourKeys.length > 4) lastFourKeys.shift();
@@ -135,14 +145,48 @@ addEventListener('keypress', e => {
 				return;
 			}
 
-			const clapper = document.querySelector('.clapper');
-			clapper.classList.toggle('clapping');
-			setTimeout(() => {
-				document.body.setAttribute('class', `${word.toLowerCase()}-mode`);
-				setTimeout(() => clapper.classList.toggle('clapping'), 500);
-			}, 500);
+			changeColor(word);
 		}
 	});
+});
+
+document.querySelector('button.change-color-button').addEventListener('click', () => {
+	document.querySelector('dialog.change-color-dialog').show();
+});
+
+sequences.forEach(({word}) => {
+	if(word !== 'SAVE') {
+		const container = document.createElement('div');
+
+		const radio = document.createElement('input');
+		radio.type = 'radio';
+		radio.name = 'change-color-radio';
+		radio.id = `change-color-to-${word}`;
+		radio.checked = document.body.classList.contains(`${word.toLowerCase()}-mode`) ||
+			(document.body.classList.length === 0 && 
+				((isDarkMode() && word === 'DARK') || (!isDarkMode() && word === 'LITE')));
+		radio.addEventListener('click', () => {
+			changeColor(word);
+		});
+
+		const label = document.createElement('label');
+		label.setAttribute('for', radio.id);
+		const color = document.createElement('div');
+		color.setAttribute('style', 
+			`background-color: var(--${word.toLowerCase()}Color); color: var(--${word.toLowerCase()}Text)`);
+		label.appendChild(color);
+		label.setAttribute('aria-label', word.toLowerCase());
+
+		container.appendChild(radio);
+		container.appendChild(label);
+
+		document.querySelector('.change-color-dialog .radio-buttons').appendChild(container);
+	}
+});
+
+document.querySelector('#color-change-save').addEventListener('click', () => {
+	localStorage.setItem('color-mode', document.body.getAttribute('class'));
+	alert('Saved!');
 });
 
 function among() {

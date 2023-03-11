@@ -47,6 +47,22 @@
 			</a>
 		</div>
 	</div>
+	<dialog class="change-color-dialog">
+		<h4>If you could pick any color,<br>what color would you pick?</h4>
+		<form method="dialog">
+			<div class="radio-buttons"></div>
+			<input type="button" value="save" id="color-change-save">
+			<input type="submit" value="exit">
+		</form>
+	</dialog>
+	<button class="change-color-button" aria-label="change color">
+		<i class="fas fa-paint-brush"></i>
+	</button>
+	<noscript>
+		<style>
+			button.change-color-button { display: none; }
+		</style>
+	</noscript>
 </section>
 
 <!-- I guess it doesn't make sense for a purely visual easter egg to be visible to screen readers..? -->
