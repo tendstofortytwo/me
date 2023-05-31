@@ -184,6 +184,15 @@ body.blue-mode {
 .main .contact-methods a.contact-method:hover p {
   opacity: 1;
 }
+.main .contact-methods a.contact-method:nth-last-child(1) p, .main .contact-methods a.contact-method:nth-last-child(2) p {
+  left: auto;
+  right: 1.5rem;
+}
+.main .contact-methods a.contact-method:nth-child(3) p {
+  left: -100rem;
+  right: -100rem;
+  margin: 0 auto;
+}
 .main .contact-methods i {
   width: 4rem;
   height: 4rem;
@@ -344,13 +353,16 @@ body.blue-mode {
   dialog.change-color-dialog br {
     display: none;
   }
-}
-@media (max-width: 25rem) {
+
   .main > .text-container h1 {
     font-size: 3rem;
   }
   .main > .text-container h3 {
     font-size: 1.5rem;
+  }
+  .main .contact-methods {
+    justify-content: center;
+    margin-top: 2rem;
   }
 }
 .clapper {

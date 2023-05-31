@@ -203,6 +203,21 @@ body {
 			&:hover p {
 				opacity: 1;
 			}
+
+			&:nth-last-child(1), &:nth-last-child(2) {
+				p {
+					left: auto;
+					right: 1.5rem;
+				}
+			}
+
+			&:nth-child(3) {
+				p {
+					left: -100rem;
+					right: -100rem;
+					margin: 0 auto;
+				}
+			}
 		}
 
 		i {
@@ -388,9 +403,7 @@ body {
 	dialog.change-color-dialog br {
 		display: none;
 	}
-}
 
-@media(max-width: 25rem) {
 	.main {
 		> .text-container {
 			h1 {
@@ -400,6 +413,10 @@ body {
 			h3 {
 				font-size: 1.5rem;
 			}
+		}
+		.contact-methods {
+			justify-content: center;
+			margin-top: 2rem;
 		}
 	}
 }
