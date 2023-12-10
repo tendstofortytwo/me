@@ -1,6 +1,6 @@
 # me
 
-This is the code for my personal website and resume. The main branch of this repository is reflected on https://nsood.in.
+This is the code for my personal website. The main branch of this repository is reflected on https://nsood.in.
 
 ## Cool things that I never get to brag about
 
