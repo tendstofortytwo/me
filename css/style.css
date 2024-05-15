@@ -21,6 +21,8 @@ body {
   --purpText: #7166af;
   --yellColor: #fcfcbf;
   --yellText: #8c8c5f;
+  --pinkColor: #fca9d6;
+  --pinkText: #7f556c;
   --blueColor: #ade3ff;
   --blueText: #46748c;
 }
@@ -69,6 +71,12 @@ body.yell-mode {
   --iconColor: #54543f;
   --textColor: #8c8c5f;
   --boldColor: #353528;
+}
+body.pink-mode {
+  --bgColor: #fca9d6;
+  --iconColor: #54543f;
+  --textColor: #6b5260;
+  --boldColor: #513645;
 }
 body.blue-mode {
   --bgColor: #ade3ff;

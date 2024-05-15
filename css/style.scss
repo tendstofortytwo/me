@@ -71,6 +71,15 @@ body {
 		--boldColor: #353528;
 	}
 
+	--pinkColor: #fca9d6;
+	--pinkText: #7f556c;
+	&.pink-mode {
+		--bgColor: #fca9d6;
+		--iconColor: #54543f;
+		--textColor: #6b5260;
+		--boldColor: #513645;
+	}
+
 	--blueColor: #ade3ff;
 	--blueText: #46748c;
 	&.blue-mode {

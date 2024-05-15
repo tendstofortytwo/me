@@ -104,17 +104,18 @@ if(today.getMonth() < birthday.month || (today.getMonth() == birthday.month && t
 }
 const tens = ['', ' ten plus', ' twenty', ' thirty', ' forty', ' fifty', ' sixty', ' seventy', 'n eighty', ' ninety'];
 const ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-document.querySelector('.age').textContent = `${tens[Math.floor(age / 10)]} ${ones[age % 10]}`;
+document.querySelector('.description').textContent = `a${tens[Math.floor(age / 10)]} ${ones[age % 10]} year-old`;
 
 // easter egg
 
 const sequences = [
-	'DARK',
+	'YELL',
 	'LITE',
 	'PURP',
-	'MINT',
-	'YELL',
+	'DARK',
 	'BLUE',
+	'PINK',
+	'MINT',
 	'SAVE'
 ].map(seq => ({
 	word: seq,
@@ -155,7 +156,8 @@ document.querySelector('button.change-color-button').addEventListener('click', (
 });
 
 sequences.forEach(({word}) => {
-	if(word !== 'SAVE') {
+	// mint is deprecated, only kept here for backwards compatibility
+	if(word !== 'SAVE' && word !== 'MINT') {
 		const container = document.createElement('div');
 
 		const radio = document.createElement('input');
