@@ -11,20 +11,6 @@ body {
   margin: 0;
   font-family: "Nunito", sans-serif;
   background: var(--bgColor);
-  --liteColor: white;
-  --liteText: #777;
-  --darkColor: black;
-  --darkText: #aaa;
-  --mintColor: #c7fcee;
-  --mintText: #5f8c80;
-  --purpColor: #cfc7fc;
-  --purpText: #7166af;
-  --yellColor: #fcfcbf;
-  --yellText: #8c8c5f;
-  --pinkColor: #fca9d6;
-  --pinkText: #7f556c;
-  --blueColor: #ade3ff;
-  --blueText: #46748c;
 }
 @media (prefers-color-scheme: light) {
   body {
@@ -42,11 +28,19 @@ body {
     --boldColor: white;
   }
 }
+body {
+  --liteColor: white;
+  --liteText: #777;
+}
 body.lite-mode {
   --bgColor: white;
   --textColor: #777;
   --iconColor: black;
   --boldColor: black;
+}
+body {
+  --darkColor: black;
+  --darkText: #aaa;
 }
 body.dark-mode {
   --bgColor: black;
@@ -54,11 +48,19 @@ body.dark-mode {
   --textColor: #aaa;
   --boldColor: white;
 }
+body {
+  --mintColor: #c7fcee;
+  --mintText: #5f8c80;
+}
 body.mint-mode {
   --bgColor: #c7fcee;
   --iconColor: #486b61;
   --textColor: #5f8c80;
   --boldColor: #10352b;
+}
+body {
+  --purpColor: #cfc7fc;
+  --purpText: #7166af;
 }
 body.purp-mode {
   --bgColor: #cfc7fc;
@@ -66,17 +68,29 @@ body.purp-mode {
   --textColor: #7166af;
   --boldColor: #312c4c;
 }
+body {
+  --yellColor: #fcfcbf;
+  --yellText: #8c8c5f;
+}
 body.yell-mode {
   --bgColor: #fcfcbf;
   --iconColor: #54543f;
   --textColor: #8c8c5f;
   --boldColor: #353528;
 }
+body {
+  --pinkColor: #fca9d6;
+  --pinkText: #7f556c;
+}
 body.pink-mode {
   --bgColor: #fca9d6;
   --iconColor: #54543f;
   --textColor: #6b5260;
   --boldColor: #513645;
+}
+body {
+  --blueColor: #ade3ff;
+  --blueText: #46748c;
 }
 body.blue-mode {
   --bgColor: #ade3ff;
@@ -166,6 +180,8 @@ body.blue-mode {
   display: flex;
   margin-left: -1.5rem;
   margin-top: 1rem;
+  /* for some reason the bluesky icon is bigger than all the other ones.
+     contain its power so it does not destroy the world. */
 }
 .main .contact-methods a.contact-method {
   color: inherit;
@@ -229,6 +245,9 @@ body.blue-mode {
   content: "";
   transition: all 0.2s ease;
   background: #333;
+}
+.main .contact-methods i.fa-bluesky::before {
+  font-size: 0.95em;
 }
 .main .contact-methods i.email {
   position: relative;
