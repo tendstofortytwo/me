@@ -5,8 +5,8 @@ canvas.height = window.innerHeight;
 
 const ctx = canvas.getContext('2d');
 const FILL_STYLES = {
-	light: 'rgba(0,0,0,0.05)',
-	dark: 'rgba(255,255,255,0.15)'
+	light: 'rgba(0,0,0,0.15)',
+	dark: 'rgba(255,255,255,0.25)'
 };
 
 const colorMode = localStorage.getItem('color-mode');
@@ -25,6 +25,10 @@ function isDarkMode() {
 		(document.body.classList.length === 0 && matchMedia('(prefers-color-scheme: dark)').matches);
 }
 
+function contains(rect, x, y) {
+	return (rect.left <= x && x <= rect.right) && (rect.top <= y && y <= rect.bottom);
+}
+
 function Point() {
 	const r = 8;
 	
@@ -38,9 +42,12 @@ function Point() {
 	// moves point to a random location and 
 	// resets its progress
 	this.init = function() {
+		const textbox = document.querySelector('.text-container').getBoundingClientRect();
 		this.progress = initialProgress;
-		this.x = Math.random() * canvas.width;
-		this.y = Math.random() * canvas.height;
+		do {
+			this.x = Math.random() * canvas.width;
+			this.y = Math.random() * canvas.height;
+		} while(contains(textbox, this.x, this.y));
 		this.r = 0;
 		this.rng = Math.random();
 	}
